@@ -36,7 +36,7 @@ export default function AuthPage() {
     // Auto-redirect if already logged in
     useEffect(() => {
         if (currentUser) {
-            navigate('/Dashboard');
+            navigate('/dashboard');
         }   
     }, [currentUser, navigate]);
 
@@ -64,7 +64,7 @@ export default function AuthPage() {
             if (isLogin) {
                 // --- LOGIN FLOW ---
                 await login(email, password);
-                navigate('/Dashboard');
+                navigate('/dashboard');
             } else {
                 // --- SIGNUP FLOW ---
                 // 1. Create the account
@@ -82,7 +82,7 @@ export default function AuthPage() {
                 }
                 
                 // 3. Navigate
-                navigate('/Dashboard');
+                navigate('/dashboard');
             }
 
         } catch (err) {

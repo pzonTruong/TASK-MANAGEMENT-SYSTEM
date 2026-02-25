@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import '../pages/DashboardLayout.css';
 import { useTheme } from '../contexts/ThemeContext';
 
@@ -16,6 +16,7 @@ const SunIcon = () => <svg width="16" height="16" fill="none" stroke="currentCol
 export default function Sidebar({ currentUser, logout }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   // theme context
   const { theme, toggleTheme } = useTheme();
@@ -43,15 +44,23 @@ export default function Sidebar({ currentUser, logout }) {
       </div>
 
       <nav className="nav-menu">
-        <a className="nav-item active">
+        <a 
+          className={`nav-item ${location.pathname === '/dashboard' ? 'active' : ''}`}
+          onClick={() => navigate('/dashboard')}
+          style={{ cursor: 'pointer' }}
+        >
           <GridIcon /> Dashboard
         </a>
-        <a className="nav-item">
+        <a 
+          className={`nav-item ${location.pathname === '/my-tasks' ? 'active' : ''}`}
+          onClick={() => navigate('/my-tasks')}
+          style={{ cursor: 'pointer' }}
+        >
           <CheckIcon /> My Tasks
         </a>
-        <a className="nav-item">
+        {/* <a className="nav-item">
           <CalendarIcon /> Calendar
-        </a>
+        </a> */}
       </nav>
 
       <div className="user-profile">
