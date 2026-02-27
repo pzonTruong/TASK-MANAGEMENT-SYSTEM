@@ -11,6 +11,7 @@ const SettingsIcon = () => <svg width="20" height="20" fill="none" stroke="curre
 const MoonIcon = () => <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>;
 const LogoutIcon = () => <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>;
 const SunIcon = () => <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>;
+const BellIcon = () => <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 0 1-3.46 0"/></svg>;
 
 
 export default function Sidebar({ currentUser, logout }) {
@@ -64,7 +65,7 @@ export default function Sidebar({ currentUser, logout }) {
       </nav>
 
       <div className="user-profile">
-        <img src="https://ui-avatars.com/api/?name=User&background=random" alt="User" className="avatar" />
+        <img src={`https://ui-avatars.com/api/?name=${encodeURIComponent(currentUser?.displayName || 'User')}&background=random`} alt={currentUser?.displayName || 'User'} className="avatar" />
         <div className="user-info">
           {/* Optional Chaining (?.) prevents crash if user is loading */}
           <h4>{currentUser?.displayName || 'User'}</h4> 
