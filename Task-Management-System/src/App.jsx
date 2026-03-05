@@ -5,6 +5,7 @@ import { AuthProvider } from './contexts/AuthContext';
 import { TaskProvider } from './contexts/TaskContext';
 import AuthPage from './pages/AuthPage';
 import Dashboard from './pages/Dashboard';
+import Board from './pages/Board';
 import MyTasks from './pages/MyTasks';
 import { ThemeProvider } from './contexts/ThemeContext';
 
@@ -18,10 +19,11 @@ function App() {
             <Routes>
               <Route path="/login" element={<AuthPage />} />
               <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/board" element={<Board />} />
               <Route path="/my-tasks" element={<MyTasks />} />
 
-              {/* Default redirect to login */}
-              <Route path="*" element={<Navigate to="/login" />} />
+              {/* Default redirect to dashboard */}
+              <Route path="*" element={<Navigate to="/dashboard" />} />
             </Routes>
           </TaskProvider>
         </ThemeProvider>

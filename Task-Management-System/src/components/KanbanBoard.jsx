@@ -2,22 +2,21 @@ import React, { useState } from 'react';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 import { v4 as uuidv4 } from 'uuid';
 import { useTask } from '../contexts/TaskContext';
-import '../pages/DashboardLayout.css'; // Adjust path to your CSS
+import '../pages/DashboardLayout.css';
 
 // --- ICONS ---
-const EditIcon = () => <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>;
 const TrashIcon = () => <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>;
 const PlusIcon = () => <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"></path></svg>;
-// const PlusIcon = () => <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"></path></svg>;
 const XIcon = () => <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>;
 
 export default function KanbanBoard({ searchQuery }) {
   const { data, setData } = useTask();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editingTask, setEditingTask] = useState(null); // If null, adding new task
+  const [editingTask, setEditingTask] = useState(null);
   
   // Modal State
   const [taskTitle, setTaskTitle] = useState('');
+  const [taskDescription, setTaskDescription] = useState('');
   const [taskPriority, setTaskPriority] = useState('medium');
   const [taskDueDate, setTaskDueDate] = useState('');
   const [subtasks, setSubtasks] = useState([]);
@@ -64,12 +63,14 @@ export default function KanbanBoard({ searchQuery }) {
     if (task) {
       setEditingTask(task);
       setTaskTitle(task.content);
+      setTaskDescription(task.description || '');
       setTaskPriority(task.priority || 'medium');
       setTaskDueDate(task.dueDate ? new Date(task.dueDate).toISOString().split('T')[0] : '');
       setSubtasks(task.subtasks || []);
     } else {
       setEditingTask(null);
       setTaskTitle('');
+      setTaskDescription('');
       setTaskPriority('medium');
       setTaskDueDate('');
       setSubtasks([]);
@@ -82,9 +83,8 @@ export default function KanbanBoard({ searchQuery }) {
 
     if (editingTask) {
       // Edit Mode
-      const updatedTask = { 
-        ...editingTask, 
-        content: taskTitle, 
+      const updatedTask = {
+        description: taskDescription,
         priority: taskPriority,
         dueDate: taskDueDate ? new Date(taskDueDate).toISOString() : editingTask.dueDate,
         subtasks 
@@ -97,6 +97,9 @@ export default function KanbanBoard({ searchQuery }) {
       // Add Mode
       const newTaskId = uuidv4();
       const newTask = { 
+        id: newTaskId, 
+        content: taskTitle,
+        description: taskDescription,
         id: newTaskId, 
         content: taskTitle, 
         priority: taskPriority,
@@ -202,6 +205,39 @@ export default function KanbanBoard({ searchQuery }) {
                                 </div>
                               </div>
 
+                              {/* Task Description */}
+                              {task.description && (
+                                <div style={{ 
+                                  fontSize: '13px', 
+                                  color: '#6b7280', 
+                                  marginBottom: '8px',
+                                  lineHeight: '1.4'
+                                }}>
+                                  {task.description}
+                                </div>
+                              )}
+
+                              {/* Date Added and Due Date Info */}
+                              <div style={{ 
+                                display: 'flex', 
+                                flexDirection: 'column', 
+                                gap: '4px', 
+                                marginBottom: '8px',
+                                fontSize: '12px',
+                                color: '#9ca3af'
+                              }}>
+                                {task.dateAdded && (
+                                  <div>📅 Added: {new Date(task.dateAdded).toLocaleDateString()}</div>
+                                )}
+                                {task.dueDate && (
+                                  <div style={{ 
+                                    color: new Date(task.dueDate) < new Date() ? '#ef4444' : '#9ca3af'
+                                  }}>
+                                    🎯 Due: {new Date(task.dueDate).toLocaleDateString()}
+                                  </div>
+                                )}
+                              </div>
+
                               {/* Progress Bar if Subtasks exist */}
                               {task.subtasks.length > 0 && (
                                 <div className="subtask-preview">
@@ -247,6 +283,18 @@ export default function KanbanBoard({ searchQuery }) {
                 onChange={e => setTaskTitle(e.target.value)} 
                 placeholder="What needs to be done?"
                 autoFocus
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Description</label>
+              <textarea 
+                className="form-input"
+                value={taskDescription}
+                onChange={e => setTaskDescription(e.target.value)}
+                placeholder="Add task details..."
+                rows="3"
+                style={{ resize: 'vertical', fontFamily: 'inherit' }}
               />
             </div>
 

@@ -53,6 +53,13 @@ export default function Sidebar({ currentUser, logout }) {
           <GridIcon /> Dashboard
         </a>
         <a 
+          className={`nav-item ${location.pathname === '/board' ? 'active' : ''}`}
+          onClick={() => navigate('/board')}
+          style={{ cursor: 'pointer' }}
+        >
+          <GridIcon /> Board
+        </a>
+        <a 
           className={`nav-item ${location.pathname === '/my-tasks' ? 'active' : ''}`}
           onClick={() => navigate('/my-tasks')}
           style={{ cursor: 'pointer' }}

@@ -11,6 +11,7 @@ const initialData = {
     'task-1': { 
       id: 'task-1', 
       content: 'Design Homepage', 
+      description: 'Create a modern and responsive homepage design',
       priority: 'high',
       dateAdded: new Date('2024-02-20').toISOString(),
       dueDate: new Date('2024-03-10').toISOString(),
