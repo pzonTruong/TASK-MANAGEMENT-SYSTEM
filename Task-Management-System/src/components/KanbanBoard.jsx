@@ -84,10 +84,15 @@ export default function KanbanBoard({ searchQuery }) {
     if (editingTask) {
       // Edit Mode
       const updatedTask = {
+        ...editingTask,
+        content: taskTitle,
         description: taskDescription,
         priority: taskPriority,
         dueDate: taskDueDate ? new Date(taskDueDate).toISOString() : editingTask.dueDate,
-        subtasks 
+        subtasks: subtasks.map(sub => ({
+          ...sub,
+          done: Boolean(sub.done)
+        }))
       };
       setData(prev => ({
         ...prev,
@@ -100,18 +105,19 @@ export default function KanbanBoard({ searchQuery }) {
         id: newTaskId, 
         content: taskTitle,
         description: taskDescription,
-        id: newTaskId, 
-        content: taskTitle, 
         priority: taskPriority,
         dateAdded: new Date().toISOString(),
         dueDate: taskDueDate ? new Date(taskDueDate).toISOString() : null,
-        subtasks 
+        subtasks: subtasks.map(sub => ({
+          ...sub,
+          done: Boolean(sub.done)
+        }))
       };
       
       const firstColId = data.columnOrder[0];
       const newColumn = {
         ...data.columns[firstColId],
-        taskIds: [newTaskId, ...data.columns[firstColId].taskIds] // Add to top
+        taskIds: [newTaskId, ...data.columns[firstColId].taskIds]
       };
 
       setData(prev => ({
