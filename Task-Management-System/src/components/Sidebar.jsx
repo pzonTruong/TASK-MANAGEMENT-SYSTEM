@@ -93,7 +93,7 @@ export default function Sidebar({ currentUser, logout }) {
             <div className="settings-menu">
               
               {/* Replace the alert button with this toggle button */}
-              {/* <button 
+              <button 
                 className="menu-item" 
                 onClick={() => {
                   toggleTheme();
@@ -105,9 +105,9 @@ export default function Sidebar({ currentUser, logout }) {
                 ) : (
                   <><SunIcon /> Light Mode</>
                 )}
-              </button> */}
+              </button>
               
-              {/* <div style={{height: '1px', background: 'var(--border-color)', margin: '4px 0'}}></div> */}
+              <div style={{height: '1px', background: 'var(--border-color)', margin: '4px 0'}}></div>
               
               <button className="menu-item danger" onClick={handleLogout}>
                 <LogoutIcon /> Log Out
