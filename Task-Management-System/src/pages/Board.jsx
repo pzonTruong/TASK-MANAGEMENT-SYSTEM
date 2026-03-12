@@ -3,6 +3,7 @@ import Sidebar from '../components/Sidebar';
 import './DashboardLayout.css';
 import { useAuth } from '../contexts/AuthContext'; // Hook into your existing auth
 import KanbanBoard from '../components/KanbanBoard';
+import AIAssistant from '../components/AIAssistant';
 import { useState, useMemo } from 'react';
 import { useTask } from '../contexts/TaskContext';
 
@@ -194,6 +195,9 @@ export default function Board() {
           <div className="board-canvas">
             <KanbanBoard searchQuery={searchQuery} />
           </div>
+
+          {/* AI Assistant */}
+          <AIAssistant tasks={data.tasks} columns={data.columns} />
         </div>
 
       </div>
