@@ -86,7 +86,7 @@ export default function Dashboard() {
         {!currentUser?.emailVerified && (
           <div style={{ background: '#fff3cd', color: '#856404', padding: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <span>
-              ⚠️ Your email is not verified. Please check your inbox.
+            Your email is not verified. Please check your inbox.
             </span>
             <div>
               <button onClick={verifyEmail} style={{ marginRight: '10px', cursor: 'pointer', background: 'none', border: '1px solid #856404', padding: '5px 10px', borderRadius: '4px' }}>
@@ -150,7 +150,8 @@ export default function Dashboard() {
                   minWidth: '280px',
                   maxHeight: '350px',
                   overflowY: 'auto',
-                  zIndex: 1000
+                  zIndex: 1000,
+                  color: 'var(--text-main)'
                 }}>
                   <div style={{ padding: '8px 12px', fontWeight: 'bold', borderBottom: '1px solid var(--border-color)' }}>
                     Overdue Tasks ({taskStats.overdueTasks.length})
@@ -158,7 +159,7 @@ export default function Dashboard() {
                   
                   {taskStats.overdueTasks.length === 0 ? (
                     <div style={{ padding: '12px', color: '#6b7280', fontSize: '14px' }}>
-                      No overdue tasks. Great job! 🎉
+                      No overdue tasks. Great job!
                     </div>
                   ) : (
                     taskStats.overdueTasks.map((task) => (
@@ -186,7 +187,7 @@ export default function Dashboard() {
                 </div>
               )}
             </div>
-            <button className="btn-help">Help</button>
+            {/* <button className="btn-help">Help</button> */}
           </div>
         </header>
 
@@ -211,9 +212,9 @@ export default function Dashboard() {
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
                   <div style={{ fontSize: '12px', color: '#6b7280', textTransform: 'uppercase', fontWeight: '600' }}>Total Tasks</div>
-                  <div style={{ fontSize: '32px', fontWeight: 'bold', marginTop: '8px' }}>{taskStats.totalTasks}</div>
+                  <div className='task-num' style={{ fontSize: '32px', fontWeight: 'bold', marginTop: '8px'}}><p>{taskStats.totalTasks}</p></div>
                 </div>
-                <div style={{ fontSize: '40px' }}>📋</div>
+                {/* <div style={{ fontSize: '40px' }}>📋</div> */}
               </div>
             </div>
 
@@ -230,7 +231,7 @@ export default function Dashboard() {
                   <div style={{ fontSize: '12px', color: '#6b7280', textTransform: 'uppercase', fontWeight: '600' }}>Completion Rate</div>
                   <div style={{ fontSize: '32px', fontWeight: 'bold', marginTop: '8px', color: '#10b981' }}>{taskStats.completionRate}%</div>
                 </div>
-                <CheckCircleIcon />
+                {/* <CheckCircleIcon /> */}
               </div>
             </div>
 
@@ -249,7 +250,7 @@ export default function Dashboard() {
                     {taskStats.overdueTasks.length}
                   </div>
                 </div>
-                <AlertIcon />
+                {/* <AlertIcon /> */}
               </div>
             </div>
 
@@ -275,7 +276,7 @@ export default function Dashboard() {
 
           {/* --- STATUS BREAKDOWN --- */}
           <div style={{ marginBottom: '30px' }}>
-            <h2 style={{ marginBottom: '16px', fontSize: '18px', fontWeight: '600' }}>Task Status Breakdown</h2>
+            <h2 className='status-breakdown-title' style={{ marginBottom: '16px', fontSize: '18px', fontWeight: '600' }}>Task Status Breakdown</h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: '16px' }}>
               
               {/* To Do */}
@@ -370,7 +371,7 @@ export default function Dashboard() {
 
           {/* --- HIGH PRIORITY TASKS SECTION --- */}
           {taskStats.highPriorityTasks.length > 0 && (
-            <div style={{ marginBottom: '30px' }}>
+            <div className='high-prior' style={{ marginBottom: '30px' }}>
               <h2 style={{ marginBottom: '16px', fontSize: '18px', fontWeight: '600' }}>High Priority Tasks</h2>
               <div style={{
                 background: 'var(--bg-secondary)',
@@ -388,7 +389,7 @@ export default function Dashboard() {
                     borderLeft: '4px solid ' + (task.priority === 'critical' ? '#ef4444' : '#f97316')
                   }}>
                     <div style={{ flex: 1 }}>
-                      <div style={{ fontWeight: '500', marginBottom: '4px' }}>{task.content}</div>
+                      <div className='high-prior-task-content' style={{ fontWeight: '500', marginBottom: '4px' }}>{task.content}</div>
                       {task.description && (
                         <div style={{ fontSize: '13px', color: '#6b7280' }}>{task.description}</div>
                       )}
@@ -435,10 +436,11 @@ export default function Dashboard() {
             </button>
             <button 
               onClick={() => navigate('/my-tasks')}
+              // className='view-task-btn'
               style={{
                 padding: '12px 24px',
                 background: 'var(--bg-secondary)',
-                color: 'var(--text-primary)',
+                color: 'var(--text-main)',
                 border: '1px solid var(--border-color)',
                 borderRadius: '8px',
                 fontWeight: '600',

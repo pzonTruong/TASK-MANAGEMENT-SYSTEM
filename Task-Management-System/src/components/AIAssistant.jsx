@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { generateDailyTips, generateTaskPriority, generateTaskSubtasks, getUsageStatus } from '../services/geminiService';
 import { useTask } from '../contexts/TaskContext';
+import '../pages/DashboardLayout.css'; // Reuse styles from Dashboard for consistency
 
 export default function AIAssistant({ tasks, columns }) {
   const { data, setData } = useTask();
@@ -204,14 +205,14 @@ export default function AIAssistant({ tasks, columns }) {
                 padding: '10px',
                 border: 'none',
                 background: activeTab === 'tips' ? 'var(--bg-secondary)' : 'transparent',
-                color: activeTab === 'tips' ? 'var(--text-primary)' : 'var(--text-secondary)',
+                color: 'var(--text-main)',
                 cursor: 'pointer',
                 fontSize: '13px',
                 fontWeight: activeTab === 'tips' ? '600' : '500',
                 borderBottom: activeTab === 'tips' ? '2px solid #667eea' : 'none',
               }}
             >
-              📋 Tips
+              Tips
             </button>
             <button
               onClick={() => { setActiveTab('analyze'); handleReset(); }}
@@ -220,14 +221,14 @@ export default function AIAssistant({ tasks, columns }) {
                 padding: '10px',
                 border: 'none',
                 background: activeTab === 'analyze' ? 'var(--bg-secondary)' : 'transparent',
-                color: activeTab === 'analyze' ? 'var(--text-primary)' : 'var(--text-secondary)',
+                color: 'var(--text-main)',
                 cursor: 'pointer',
                 fontSize: '13px',
                 fontWeight: activeTab === 'analyze' ? '600' : '500',
                 borderBottom: activeTab === 'analyze' ? '2px solid #764ba2' : 'none',
               }}
             >
-              ➕ Analyze
+              Analyze
             </button>
           </div>
 

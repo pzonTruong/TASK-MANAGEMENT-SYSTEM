@@ -74,6 +74,12 @@
 .settings-menu { background-color: var(--card-bg); border: 1px solid var(--border-color); }
 .menu-item { color: var(--text-main); }
 .menu-item:hover { background-color: var(--input-bg); color: var(--text-main); }
+.dashboard-header h1 {color: var(--text-main);}
+.task-num p {color: var(--text-main);}
+.high-prior h2 {color: var(--text-main);}
+.high-prior-task-content {color: var(--text-main);}
+.status-breakdown-title {color: var(--text-main);}
+.view-task-btn {color: var(--text-main);}
 
 .dashboard-container {
   display: flex;

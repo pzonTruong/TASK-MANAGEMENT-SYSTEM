@@ -152,7 +152,7 @@ export default function Board() {
                 </div>
               )}
             </div>
-            <button className="btn-help">Help</button>
+            {/* <button className="btn-help">Help</button> */}
           </div>
         </header>
 
