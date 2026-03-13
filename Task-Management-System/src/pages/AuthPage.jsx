@@ -199,7 +199,7 @@ export default function AuthPage() {
                     </motion.div>
                 </AnimatePresence>
 
-                <div className="divider">
+                {/* <div className="divider">
                     <span>Or continue with</span>
                 </div>
 
@@ -207,7 +207,7 @@ export default function AuthPage() {
                     <button className="btn-social">
                         <GoogleIcon /> Google
                     </button>
-                </div>
+                </div> */}
 
                 <div className="auth-footer">
                     {isLogin ? (

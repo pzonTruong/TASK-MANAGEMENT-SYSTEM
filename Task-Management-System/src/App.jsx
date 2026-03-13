@@ -1,17 +1,16 @@
-// src/App.js
+// src/App.jsx
 import React from 'react';
-import { useAuth } from './contexts/AuthContext';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { TaskProvider } from './contexts/TaskContext';
+import { ThemeProvider } from './contexts/ThemeContext';
 import AuthPage from './pages/AuthPage';
 import Dashboard from './pages/Dashboard';
 import Board from './pages/Board';
 import MyTasks from './pages/MyTasks';
-import { ThemeProvider } from './contexts/ThemeContext';
+import { Analytics } from "@vercel/analytics/next";
 
-
-function App() {
-  const { loading } = useAuth();
+function AppContent() {
+  const { currentUser, loading } = React.useAuth();
 
   if (loading) {
     return (
@@ -27,65 +26,34 @@ function App() {
     );
   }
 
+  const ProtectedRoute = ({ children }) => {
+    if (!currentUser) {
+      return <Navigate to="/login" replace />;
+    }
+    return children;
+  };
+
   return (
     <BrowserRouter>
-      <ThemeProvider>
-        <TaskProvider>
-          <Routes>
-            <Route path="/login" element={<AuthPage />} />
-            <Route 
-              path="/dashboard" 
-              element={
-                <ProtectedRoute>
-                  <Dashboard />
-                </ProtectedRoute>
-              } 
-            />
-            <Route 
-              path="/board" 
-              element={
-                <ProtectedRoute>
-                  <Board />
-                </ProtectedRoute>
-              } 
-            />
-            <Route 
-              path="/my-tasks" 
-              element={
-                <ProtectedRoute>
-                  <MyTasks />
-                </ProtectedRoute>
-              } 
-            />
-
-            {/* Default redirect to login */}
-            <Route path="*" element={<Navigate to="/login" />} />
-          </Routes>
-        </TaskProvider>
-      </ThemeProvider>
+      <Routes>
+        <Route path="/login" element={<AuthPage />} />
+        <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+        <Route path="/board" element={<ProtectedRoute><Board /></ProtectedRoute>} />
+        <Route path="/my-tasks" element={<ProtectedRoute><MyTasks /></ProtectedRoute>} />
+        <Route path="*" element={<Navigate to="/login" replace />} />
+      </Routes>
     </BrowserRouter>
   );
 }
 
-const ProtectedRoute = ({ children }) => {
-  const { currentUser, loading } = useAuth();
-  if (loading) {
-    return (
-      <div style={{ 
-        display: 'flex', 
-        justifyContent: 'center', 
-        alignItems: 'center', 
-        height: '100vh',
-        fontFamily: 'system-ui'
-      }}>
-        Loading...
-      </div>
-    );
-  }
-  if (!currentUser) {
-    return <Navigate to="/login" />;
-  }
-  return children;
-};
+function App() {
+  return (
+    <ThemeProvider>
+      <TaskProvider>
+        <AppContent />
+      </TaskProvider>
+    </ThemeProvider>
+  );
+}
 
 export default App;
