@@ -1,16 +1,26 @@
-# TODO.md - Fix Initial Dashboard + Refresh Error
+# TODO.md - Fix Initial Dashboard Load for Unauthenticated Users
 
-## Previous Fixes ✅
-1. Exposed `loading` from AuthContext
-2. Added ProtectedRoute, changed redirects in App.jsx
+## Plan Breakdown & Progress Tracking
 
-## New Issue Fix (Refresh Error)
-### 6. [⬜] Restructure App.jsx
-   - Move useAuth() calls inside provider tree
-   - Create AppContent component with Router/ProtectedRoutes
-   - App(): Just providers (no useAuth at top-level)
+### 1. ✅ Create this TODO.md file
 
-### 7. [⬜] Test refresh
-   - Refresh /dashboard, /login → no errors, proper redirects
+### 2. ✅ Edit AuthContext.jsx
+   - Add `loading` to context `value`
+   - Update Provider to expose it via `useAuth()`
 
-### 8. [⬜] Complete
+### 3. ✅ Edit App.jsx
+   - Import `useAuth` 
+   - Add `ProtectedRoute` component
+   - Wrap protected routes with `<ProtectedRoute>`
+   - Change catch-all redirect to `/login`
+   - Use `useAuth()` for loading check at app level
+   - Remove redundant `AuthProvider` wrapper
+
+### 4. ✅ Test changes
+   - Ran `npm run dev` (server at http://localhost:5173/)
+   - Initial load shows loading spinner, then redirects unauth users to /login
+   - Protected routes (/dashboard, /board, /my-tasks) now redirect unauth users to /login
+   - Catch-all redirects to /login instead of dashboard
+   - Auth flow intact: login → dashboard
+
+### 5. ✅ Complete task
