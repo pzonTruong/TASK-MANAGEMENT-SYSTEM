@@ -40,7 +40,6 @@ A modern, feature-rich web application for organizing and managing tasks with a 
 - 📊 **Kanban Board** - Drag-and-drop task management (To Do → In Progress → Done)
 - 🔔 **Smart Notifications** - Real-time overdue task alerts with badge and dropdown
 - 🎨 **Dark/Light Theme** - Toggle between themes with persistent preferences
-- 👤 **Dynamic Avatars** - User avatars auto-generated from display names
 - 📝 **Task Management** - Full task lifecycle with priorities, due dates, and subtasks
 - 🔍 **Search & Filter** - Find and filter tasks by content and status
 - 📱 **Responsive Design** - Works seamlessly on all devices
@@ -119,7 +118,7 @@ npm run lint     # Check code quality
 
 ## 📖 Full Documentation
 
-See [DOCUMENTATION.md](./Documents/DOCUMENTATION.md) for comprehensive project documentation including:
+See [DOCUMENTATION.md](./documents/DOCUMENTATION.md) for comprehensive project documentation including:
 - Detailed architecture overview
 - Complete API reference
 - Context management guide
