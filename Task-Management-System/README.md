@@ -119,7 +119,7 @@ npm run lint     # Check code quality
 
 ## 📖 Full Documentation
 
-See [DOCUMENTATION.md](./DOCUMENTATION.md) for comprehensive project documentation including:
+See [DOCUMENTATION.md](./Documents/DOCUMENTATION.md) for comprehensive project documentation including:
 - Detailed architecture overview
 - Complete API reference
 - Context management guide
